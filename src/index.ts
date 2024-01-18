@@ -1,46 +1,40 @@
 import { QMainWindow, QWidget, QLabel, FlexLayout, QPushButton, QIcon } from '@nodegui/nodegui';
-import logo from '../assets/logox200.png';
 
 const win = new QMainWindow();
-win.setWindowTitle("Hello World");
+win.setWindowTitle('BMSNavServer');
 
-const centralWidget = new QWidget();
-centralWidget.setObjectName("myroot");
+const rootWidget = new QWidget();
+rootWidget.setObjectName('root');
+
 const rootLayout = new FlexLayout();
-centralWidget.setLayout(rootLayout);
+rootWidget.setLayout(rootLayout);
 
 const label = new QLabel();
-label.setObjectName("mylabel");
-label.setText("Hello");
+label.setObjectName('ramp-start');
+label.setText('Ramp Start');
 
 const button = new QPushButton();
-button.setIcon(new QIcon(logo));
-
-const label2 = new QLabel();
-label2.setText("World");
-label2.setInlineStyle(`
-  color: red;
-`);
+button.setText('GO!');
 
 rootLayout.addWidget(label);
 rootLayout.addWidget(button);
-rootLayout.addWidget(label2);
-win.setCentralWidget(centralWidget);
+
+win.setCentralWidget(rootWidget);
 win.setStyleSheet(
-  `
-    #myroot {
-      background-color: #009688;
-      height: '100%';
-      align-items: 'center';
-      justify-content: 'center';
-    }
-    #mylabel {
-      font-size: 16px;
-      font-weight: bold;
-      padding: 1;
-    }
-  `
-);
+`
+  #root {
+    background-color: rgb(42,41,39);;
+    height: '100%';
+    align-items: 'center';
+    justify-content: 'center';
+  }
+  #ramp-start {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 1;
+  }
+`);
+
 win.show();
 
 (global as any).win = win;
