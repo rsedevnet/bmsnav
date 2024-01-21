@@ -29,6 +29,9 @@ from PyQt5.QtWidgets import (
 
 # ======== Global ========
 
+def get_registry_key(version):
+  return rf'SOFTWARE\WOW6432Node\Benchmark Sims\Falcon BMS {version}'
+
 class LogLevel(StrEnum):
   INFO = 'INFO'
   WARN = 'WARN'
@@ -36,8 +39,22 @@ class LogLevel(StrEnum):
 
 DDS_DIR = 'dds'
 SERVER_ROOT = 'serve'
+
+DEFAULT_BMS_VERSION = '4.37'
+DEFAULT_REGISTRY_KEY = get_registry_key(DEFAULT_BMS_VERSION)
 DEFAULT_SERVER_PORT = 2676
-DEFAULT_THEATERS = ["Korea", "Balkans", "Israel"]
+DEFAULT_THEATERS = [
+  {
+    "name": "Korea"
+  },
+  {
+    "name": "Balkans"
+  },
+  {
+    "name": "Israel"
+  }
+]
+DEFAULT_SELECTED_THEATER = DEFAULT_THEATERS[0]['name']
 
 def console_get_message(message, level = LogLevel.INFO):
   now = datetime.now()
@@ -53,18 +70,18 @@ class HTTPHandler(SimpleHTTPRequestHandler):
   def log_message(self, format, *args):
     pass
 
-class ServerDaemon(QThread):
+class Server(QThread):
+  started = pyqtSignal()
   error = pyqtSignal(Exception)
-  initialized = pyqtSignal()
 
   def __init__(self, port):
-    super(ServerDaemon, self).__init__()
+    super(Server, self).__init__()
     self.port = port
 
   def run(self):
     try:
       with TCPServer(("", self.port), HTTPHandler) as self._server:
-        self.initialized.emit()
+        self.started.emit()
         self._server.serve_forever()
     except Exception as err:
       self.error.emit(err)
@@ -94,6 +111,7 @@ class DDSConverter(QThread):
           right_dims = int(img.size[0] / 2), 0, img.size[0], img.size[1]
           self.write_png(img, out_left_path, left_dims)
           self.write_png(img, out_right_path, right_dims)
+
     except Exception as err:
       self.error.emit(err)
 
@@ -177,40 +195,79 @@ class Window(QMainWindow):
     self.setCentralWidget(central_widget)
 
     self.port = DEFAULT_SERVER_PORT
-    self.theaters = DEFAULT_THEATERS
+    self.theater_names = list(map(lambda t: t['name'], DEFAULT_THEATERS))
+    self.selected_theater = DEFAULT_SELECTED_THEATER
+    self.bms_version = DEFAULT_BMS_VERSION
+    self.registry_key = DEFAULT_REGISTRY_KEY
+
+    config_file = None
 
     try:
       config_file = open('config.json', 'r')
-      self.config = json.loads(config_file.read())
+      config = json.loads(config_file.read())
 
       try:
-        port = self.config['port']
+        bms_home = config['bmsHome']
+
+        if bms_home:
+          if os.path.exists(bms_home):
+            self.bms_home = bms_home
+          else:
+            self.console_append('BMS home directory specified in config file does not exist; reverting to registry entry.', LogLevel.WARN)
+      except Exception as bms_home_err:
+        pass
+
+      try:
+        bms_version = config['bmsVersion']
+
+        if version:
+          self.bms_version = bms_version
+          self.registry_key = get_registry_key(bms_version)
+      except Exception as bms_version_err:
+        pass
+
+      try:
+        port = config['port']
 
         if port > 1024 and port <= 65535:
           self.port = port
         else:
           self.console_append('Invalid port in config file; reverting to default.', LogLevel.WARN)
       except Exception as port_err:
-        self.console_append('Error reading port from config file; reverting to default.', LogLevel.WARN)
+        pass
 
       try:
-        theaters = self.config['theaters']
+        theaters = config['theaters']
         theater_names = [] 
 
-        for t in theaters:
-          theater_names.append(t['name'])
+        if theaters:
+          theater_names = list(map(lambda t: t['name'], theaters))
 
-        self.theaters = theater_names
+        if theater_names:
+          self.theater_names = theater_names
+        else:
+          self.console_append('Empty theater list in config file; reverting to default.', LogLevel.INFO)
+
+        selected_theater = DEFAULT_SELECTED_THEATER
+
+        if selected_theater and selected_theater in theater_names:
+          self.selected_theater = selected_theater 
+        else:
+          self.console_append('Specified selected theater in config file not found; reverting to default.', LogLevel.WARN)
+          self.selected_theater = self.theater_names[0]
 
       except Exception as theater_err:
-        self.console_append('Error reading theaters from config file; reverting to default.', LogLevel.WARN)
-
-      config_file.close()
+        pass
 
     except Exception as err:
-      self.console_append('Error reading config file: ' + str(err), LogLevel.WARN)
+      self.console_append('Unable to read config file; using default values.', LogLevel.INFO)
 
-    theater_combobox.addItems(self.theaters)     
+    finally:
+      if config_file:
+        config_file.close()
+
+    theater_combobox.addItems(self.theater_names)
+    theater_combobox.setCurrentText(self.selected_theater)
 
     self.monitor = DDSMonitor(self._on_dds_change)
     self.console_append('Monitoring kneeboard DDS files for changes.');
@@ -221,9 +278,9 @@ class Window(QMainWindow):
     self.converter.finished.connect(self._on_conversion_finished)
     self.converter.start()
 
-    self.server = ServerDaemon(self.port)
+    self.server = Server(self.port)
     self.server.error.connect(self._on_server_error)
-    self.server.initialized.connect(self._on_server_initialized)
+    self.server.started.connect(self._on_server_started)
     self.server.start()
 
   def console_append(self, message, level = LogLevel.INFO):
@@ -239,14 +296,28 @@ class Window(QMainWindow):
     self.console_output_scrollbar.setValue(self.console_output_scrollbar.maximum()) 
 
   def _on_theater_change(self, theater):
-    self.config['selectedTheater'] = theater
+    config = None
+    config_file = None
 
     try:
-      with open('config.json', 'w') as config_file:
-        config_file.write(json.dumps(self.config, indent=2)) 
+      with open('config.json', 'r') as config_file:
+        config = json.loads(config_file.read())
+    except Exception as json_read_err:
+      config = {}
+    finally:
+      if config_file:
         config_file.close()
-    except Exception as err:
-      self.console_append('Error writing selected theater to config file: ' + str(err))
+
+    config['selectedTheater'] = theater
+
+    try:
+      with open('config.json', 'w+') as config_file:
+        config_file.write(json.dumps(config, indent=2)) 
+    except Exception as json_write_err:
+      self.console_append('Error writing selected theater to config file: ' + str(err), LogLevel.WARN)
+    finally:
+      if config_file:
+        config_file.close()
 
   def _on_dds_change(self):
     self.console_append('Kneeboard DDS file(s) changed; regenerating images...') 
@@ -254,7 +325,7 @@ class Window(QMainWindow):
     self.converter.start()
     self.converter.finished.connect(self._on_conversion_finished)
 
-  def _on_server_initialized(self):
+  def _on_server_started(self):
     self.console_append(f'Server started on port {self.port}: waiting for requests.')
     self.console_append('Initialization complete.')
 
