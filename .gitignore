@@ -1,7 +1,0 @@
-node_modules
-deploy
-dist
-*.log
-*.swp
-*.swo
-.DS_Store
