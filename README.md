@@ -6,12 +6,12 @@ In order to use BMSNav, you must run the accompanying server (BMSNavServer) on t
 
 The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). As such, there's no need to copy/paste files or manually convert to images and transfer them to your mobile device. Simply run the server, select a theater, and you're good to go!
 
-[Installation](#installation)
-[Usage](#usage)
-[Donations](#donations)
-[Development](#development)
-[Contact](#contact)
-[License](#license)
+[Installation](#installation)  
+[Usage](#usage)  
+[Donations](#donations)  
+[Development](#development)  
+[Contact](#contact)  
+[License](#license) 
 
 <a name="installation"></a>
 ## Installation
@@ -44,7 +44,15 @@ The source code for the _server_ is kept here in this repository. It's a Python 
 * Falcon BMS (obviously)
 * Node (preferably LTS)
 * Python3
+* PyQt5
 * pillow
+
+You can install Node and Python in whichever manner you choose. To install the required Python libraries...
+
+```
+pip install PyQt5
+pip install pillow
+```
 
 #### Retrieving Dependencies
 
