@@ -44,13 +44,16 @@ The source code for the _server_ is kept here in this repository. It's a Python 
 * Falcon BMS (obviously)
 * Node (preferably LTS)
 * Python3
+* Git
 * PyQt5
+* PyInstaller
 * pillow
 
-You can install Node and Python in whichever manner you choose. To install the required Python libraries...
+You can install Node, Python and Git by whichever method you choose. To install the required Python libraries...
 
 ```
 pip install PyQt5
+pip install PyInstaller
 pip install pillow
 ```
 
