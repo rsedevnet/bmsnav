@@ -201,6 +201,7 @@ class Window(QMainWindow):
     self.registry_key = DEFAULT_REGISTRY_KEY
 
     config_file = None
+    selected_theater = DEFAULT_SELECTED_THEATER
 
     try:
       config_file = open('config.json', 'r')
@@ -237,6 +238,14 @@ class Window(QMainWindow):
         pass
 
       try:
+        selected_theater = config['selectedTheater']
+
+        if selected_theater:
+          self.selected_theater = selected_theater
+      except Exception as selected_theater_err:
+        pass
+
+      try:
         theaters = config['theaters']
         theater_names = [] 
 
@@ -248,12 +257,10 @@ class Window(QMainWindow):
         else:
           self.console_append('Empty theater list in config file; reverting to default.', LogLevel.INFO)
 
-        selected_theater = DEFAULT_SELECTED_THEATER
-
         if selected_theater and selected_theater in theater_names:
           self.selected_theater = selected_theater 
         else:
-          self.console_append('Specified selected theater in config file not found; reverting to default.', LogLevel.WARN)
+          self.console_append('Specified selected theater not found; reverting to default.', LogLevel.WARN)
           self.selected_theater = self.theater_names[0]
 
       except Exception as theater_err:
