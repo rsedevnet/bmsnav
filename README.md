@@ -82,7 +82,7 @@ npm run package
 <a name="contact"></a>
 ## Contact
 
-Email: seidemiller@gmail.com
+Email: seidemiller@gmail.com  
 Falcon Lounge: Terminus
 
 <a name="license"></a>
