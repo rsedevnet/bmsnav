@@ -28,7 +28,7 @@ TODO
 
 If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you very much!
 
-PayPal: [seidemiller@gmail.com](https://paypal.me/seidemiller)
+PayPal: [seidemiller@gmail.com](https://paypal.me/seidemiller)  
 Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@seidemiller)
 
 <a name="development"></a>
