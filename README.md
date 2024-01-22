@@ -26,7 +26,7 @@ TODO
 <a name="donations"></a>
 ## Donations
 
-If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you!
+If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you very much!
 
 PayPal: [seidemiller@gmail.com](https://paypal.me/seidemiller)
 Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@seidemiller)
@@ -36,7 +36,7 @@ Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@se
 
 The source code for the mobile app (iOS and Android) is kept in a private repository.
 
-The source code for the _server_ is kept here in this repository. It's a Python app and packaged as a Windows executable.
+The source code for the _server_ is kept here in this repository. It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the [kneeboard-extractor](https://github.com/root0fall/kneeboard-extractor) project by root0fall.
 
 #### Requirements
 
