@@ -3,6 +3,8 @@ import os
 import json
 import ntpath
 import winreg
+import fnmatch
+import shutil
 
 from os.path import abspath
 from functools import partial
@@ -13,6 +15,7 @@ from datetime import datetime
 from threading import Timer
 
 from PIL import Image
+from PyQt5.Qt import QDesktopServices, QUrl
 from PyQt5.QtCore import QFileSystemWatcher, QThread, pyqtSignal
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (
@@ -194,13 +197,87 @@ class DDSMonitor():
 
     return dds_dir
 
+class BriefingConverter(QThread):
+  error = pyqtSignal(Exception)
+
+  def __init__(self, briefings_dir):
+    super(BriefingConverter, self).__init__()
+    self.briefings_dir = briefings_dir
+
+  def run(self):
+    most_recent_briefing = None
+    most_recent_time = 0
+
+    try:
+      entries = os.scandir(self.briefings_dir)
+
+      for entry in entries:
+        if fnmatch.fnmatch(entry, '*briefing.html'):
+          mod_time = entry.stat().st_mtime_ns
+
+          if mod_time > most_recent_time:
+            most_recent_briefing = entry
+            most_recent_time = mod_time
+
+      if most_recent_briefing:
+        # TODO: This is a very ugly way to copy a file, but I was getting errors with
+        # shutil.copy/copy2 because the BMS process still had the file open. :\
+        out_path = os.path.join(SERVER_ROOT, 'briefing.html')
+        os.system(f'copy "{most_recent_briefing.path}" "{out_path}" >nul 2>&1')
+
+    except Exception as err:
+      self.error.emit(err)
+    finally:
+      entries.close()
+
+  def stop(self):
+    self.wait()
+
+  def convert(self, dds_file):
+    sys.stderr.write('\nPATH: ' + dds_file)
+    dds_index = int(ntpath.basename(dds_file).split('.')[0])
+    img_index = (dds_index - 7982) + 1
+
+    if img_index < 10:
+      img_index = f'0{str(img_index)}' 
+
+    out_left_path = os.path.join(SERVER_ROOT, f'l{img_index}.png')
+    out_right_path = os.path.join(SERVER_ROOT, f'r{img_index}.png')
+
+    with Image.open(dds_file) as img:
+      left_dims = (0 ,0, int(img.size[0] / 2), img.size[1])
+      right_dims = int(img.size[0] / 2), 0, img.size[0], img.size[1]
+      self.write_png(img, out_left_path, left_dims)
+      self.write_png(img, out_right_path, right_dims)
+
+  def write_png(self, img, out_path, dims):
+    cropped = img.crop(dims)
+    cropped.save(out_path, 'png')
+
+class BriefingMonitor(): 
+  def __init__(self, bms_home_dir, on_change):
+    super(BriefingMonitor, self).__init__()
+    self.bms_home_dir = bms_home_dir
+    self.on_change = on_change
+    self.fs_watcher = None
+    self.briefing_dir = None
+
+  def start(self):
+    briefing_dir = os.path.join(self.bms_home_dir, 'User', 'Briefings')
+    self.fs_watcher = QFileSystemWatcher([briefing_dir])
+    self.fs_watcher.directoryChanged.connect(self.on_change)
+
+# ======== Window and UI Elements ========
+
 class Window(QMainWindow):
   def __init__(self):
     super(Window, self).__init__()
 
     self.dds_monitor = None
     self.dds_dir = None
-    self.converter = None
+    self.dds_converter = None
+    self.briefing_monitor = None
+    self.briefing_converter = None
 
     self.console_messages = console_get_message('Welcome to BMSNavServer! Initializing...')
 
@@ -237,6 +314,11 @@ class Window(QMainWindow):
     theater_selection_layout.addWidget(theater_combobox)
     theater_selection_layout.setContentsMargins(4, 0, 0, 0)
 
+    doc_button = QPushButton()
+    doc_button.setObjectName('doc_button')
+    doc_button.setText('Documentation')
+    doc_button.clicked.connect(self.doc_open)
+
     clear_button = QPushButton()
     clear_button.setObjectName('clear_button')
     clear_button.setText('Clear Console')
@@ -244,6 +326,7 @@ class Window(QMainWindow):
 
     controls_layout.addWidget(theater_selection)
     controls_layout.addStretch(1)
+    controls_layout.addWidget(doc_button)
     controls_layout.addWidget(clear_button)
     controls_layout.setContentsMargins(0, 0, 0, 0)
 
@@ -323,27 +406,36 @@ class Window(QMainWindow):
     init_failed = False
 
     if bms_home:
-      try:
-        self.dds_monitor = DDSMonitor(bms_home, self._on_dds_change)
-        self.dds_dir = self.dds_monitor.start(self.selected_theater)
-        self.console_append('Monitoring kneeboard DDS files for changes.')
-      except Exception as monitor_err:
-        self.console_append('Error monitoring kneeboard DDS files for changes: ' + str(monitor_err), LogLevel.ERROR)
+      try:    
+        self.briefing_monitor = BriefingMonitor(bms_home, self._on_briefing_change)
+        self.briefing_monitor.start()
+        self.console_append('Monitoring briefings directory for changes.')
+      except Exception as briefing_monitor_err:
+        self.console_append('Error monitoring briefings directory for changes: ' + str(briefing_monitor_err), LogLevel.ERROR)
         init_failed = True
 
-      if self.dds_dir:
-        self.console_append('Generating kneeboard images...')
+      if (not init_failed):
+        try:
+          self.dds_monitor = DDSMonitor(bms_home, self._on_dds_change)
+          self.dds_dir = self.dds_monitor.start(self.selected_theater)
+          self.console_append('Monitoring kneeboard DDS files for changes.')
+        except Exception as dds_monitor_err:
+          self.console_append('Error monitoring kneeboard DDS files for changes: ' + str(dds_monitor_err), LogLevel.ERROR)
+          init_failed = True
 
-        self.theater_combobox.setEnabled(False)
-        self.converter = DDSConverter(self.dds_dir)
-        self.converter.error.connect(self._on_conversion_error)
-        self.converter.finished.connect(self._on_conversion_finished)
-        self.converter.start()
+        if self.dds_dir:
+          self.console_append('Generating kneeboard images...')
 
-        self.server = Server(self.port)
-        self.server.error.connect(self._on_server_error)
-        self.server.started.connect(self._on_server_started)
-        self.server.start()
+          self.theater_combobox.setEnabled(False)
+          self.dds_converter = DDSConverter(self.dds_dir)
+          self.dds_converter.error.connect(self._on_dds_conversion_error)
+          self.dds_converter.finished.connect(self._on_dds_conversion_finished)
+          self.dds_converter.start()
+
+          self.server = Server(self.port)
+          self.server.error.connect(self._on_server_error)
+          self.server.started.connect(self._on_server_started)
+          self.server.start()
 
     else:
       init_failed = True
@@ -366,6 +458,12 @@ class Window(QMainWindow):
     self.console_messages = message;
     self.console_output.setPlainText(self.console_messages)
     self.console_output_scrollbar.setValue(self.console_output_scrollbar.maximum()) 
+
+  def doc_open(self):
+    try:
+      QDesktopServices.openUrl(QUrl('https://github.com/doomsean/bmsnav'))
+    except Exception as doc_err:
+      self.console_append('Unable to open documentation website: ' + str(doc_err))
 
   def _get_bms_home_dir(self):
     try:
@@ -436,21 +534,28 @@ class Window(QMainWindow):
           config_file.close()
 
       self.theater_combobox.setEnabled(False)
-      self.converter = DDSConverter(self.dds_dir)
-      self.converter.error.connect(self._on_conversion_error)
-      self.converter.finished.connect(self._on_conversion_finished)
-      self.converter.start()
+      self.dds_converter = DDSConverter(self.dds_dir)
+      self.dds_converter.error.connect(self._on_dds_conversion_error)
+      self.dds_converter.finished.connect(self._on_dds_conversion_finished)
+      self.dds_converter.start()
 
   def _on_dds_change(self, path):
     if "7982.dds" in path:
       self.console_append('Kneeboard DDS file(s) changed; regenerating images...') 
       self.theater_combobox.setEnabled(False)
 
-    self.converter = DDSConverter(path)
-    self.converter.start()
+    self.dds_converter = DDSConverter(path)
+    self.dds_converter.start()
 
     if "7997.dds" in path:
       self.converter.finished.connect(self._on_conversion_finished)
+
+  def _on_briefing_change(self, path):
+    self.console_append('Briefing changed; copying HTML file...')
+    self.briefing_converter = BriefingConverter(path)
+    self.briefing_converter.error.connect(self._on_briefing_conversion_error)
+    self.briefing_converter.finished.connect(self._on_briefing_conversion_finished)
+    self.briefing_converter.start()
 
   def _on_server_started(self):
     self.console_append(f'Server started on port {self.port}: waiting for requests.')
@@ -459,15 +564,23 @@ class Window(QMainWindow):
   def _on_server_error(self, err):
     self.console_append('Error initializing server: ' + str(err), LogLevel.ERROR)
 
-  def _on_conversion_finished(self):
+  def _on_dds_conversion_finished(self):
     self.console_append('Kneeboard images generated.')
     self.theater_combobox.setEnabled(True)
     self.dds_monitor.restart(None)
 
-  def _on_conversion_error(self, err):
+  def _on_dds_conversion_error(self, err):
     self.console_append('Error generating kneeboard image(s): ' + str(err), LogLevel.ERROR)
     self.theater_combobox.setEnabled(True)
     self.dds_monitor.restart(None)
+
+  def _on_briefing_conversion_finished(self):
+    self.console_append('Copied briefing HTML file.')
+    pass
+
+  def _on_briefing_conversion_error(self, err):
+    self.console_append('Error copying briefing HTML file: ' + str(err), LogLevel.ERROR)
+    pass
 
 # ======== Main ========
 
