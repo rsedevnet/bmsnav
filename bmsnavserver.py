@@ -4,15 +4,12 @@ import json
 import ntpath
 import winreg
 import fnmatch
-import shutil
+import subprocess
 
-from os.path import abspath
-from functools import partial
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from socketserver import TCPServer
 from enum import StrEnum
 from datetime import datetime
-from threading import Timer
 
 from PIL import Image
 from PyQt5.Qt import QDesktopServices, QUrl
@@ -218,13 +215,14 @@ class BriefingConverter(QThread):
             most_recent_briefing = entry
             most_recent_time = mod_time
 
+      entries.close()
+
       if most_recent_briefing:
-        # TODO: This is a very ugly way to copy a file, but I was getting errors with
+        # TODO: This is an ugly way to copy a file, but I was getting errors with
         # shutil.copy/copy2 because the BMS process still had the file open. :\
         out_path = os.path.join(SERVER_ROOT, 'briefing.html')
-        os.system(f'copy "{most_recent_briefing.path}" "{out_path}" >nul 2>&1')
-
-      entries.close()
+        cmd = 'copy "%s" "%s" >nul 2>&1' % (most_recent_briefing.path, out_path)
+        status = subprocess.call(cmd, shell=True)
 
     except Exception as err:
       self.error.emit(err)
@@ -353,7 +351,7 @@ class Window(QMainWindow):
     self.registry_key = DEFAULT_REGISTRY_KEY
 
     config_file = None
-    selected_theater = DEFAULT_SELECTED_THEATER
+    self.selected_theater = DEFAULT_SELECTED_THEATER
 
     try:
       config_file = open('config.json', 'r')
