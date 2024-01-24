@@ -1,15 +1,4 @@
 {
   "port": 2676,
-  "selectedTheater": "Korea",
-  "theaters": [
-    {
-      "name": "Korea"
-    },
-    {
-      "name": "Balkans"
-    },
-    {
-      "name": "Israel"
-    }
-  ]
+  "selectedTheater": "Korea"
 }
