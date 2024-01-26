@@ -1,11 +1,8 @@
 # <img src="https://rsedevnet.github.io/bmsnav/images/icon.png" height="128" width="128"/>
 
+BMSNav is a companion app for the [Falcon BMS](https://www.falcon-bms.com/) flight simulator that displays kneeboards, briefings, and various navigation aids on a mobile device. It was built primarily to act as a sort of physical kneeboard, obviating the need to activate the pilot model and to flip through the in-game kneeboards. I use it myself on every mission that I fly. That was the impetus, in fact. It's something that I _wanted_, but which didn't exist.
 
-BMSNav is a companion app for the [Falcon BMS](https://www.falcon-bms.com/) flight simulator that displays pilot kneeboards and various navigation aids on a mobile device.
-
-In order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself, and your mobile device must be able to access the server.
-
-The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). As such, there's no need to copy/paste files or manually convert to images and transfer them to your mobile device. Simply run the server, select a theater, and you're good to go!
+Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). It also monitors the briefings directory and grabs the latest HTML file whenever a change is made (when the user "prints" the briefing in BMS). As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're good to go!
 
 [Installation](#installation)  
 [Usage](#usage)  
@@ -17,7 +14,13 @@ The server monitors the kneeboard files for the selected theater and automatical
 <a name="installation"></a>
 ## Installation
 
-TODO
+#### BMSNav
+
+The BMSNav mobile app will soon be availble for both iOS and Android devices via the Apple Store and the Google Play Console. Details to come...
+
+#### BMSNavServer
+
+The latest server release can be downloaded here. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). It's that simple.
 
 <a name="usage"></a>
 ## Usage
