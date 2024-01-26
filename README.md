@@ -1,4 +1,5 @@
-# BMSNav
+# <img src="https://rsedevnet.github.io/bmsnav/images/icon.png" height="128" width="128"/>
+
 
 BMSNav is a companion app for the [Falcon BMS](https://www.falcon-bms.com/) flight simulator that displays pilot kneeboards and various navigation aids on a mobile device.
 
