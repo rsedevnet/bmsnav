@@ -31,6 +31,10 @@ body > div {
   margin-right: auto;
 }
 
+div.box-Body {
+  margin: 0 !important;
+}
+
 summary {
   cursor: pointer;
   text-decoration: underline;
