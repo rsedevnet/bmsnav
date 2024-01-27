@@ -7,7 +7,7 @@ import fnmatch
 import subprocess
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-from socketserver import TCPServer
+from socketserver import TCPServer, ThreadingMixIn
 from enum import StrEnum
 from datetime import datetime
 
@@ -74,9 +74,18 @@ def console_get_message(message, level = LogLevel.INFO):
 
 # ======== Classes ========
 
+class ThreadingServer(ThreadingMixIn, HTTPServer):
+  pass
+
 class HTTPHandler(SimpleHTTPRequestHandler):
   def __init__(self, *args, **kwargs):
-    super().__init__(*args, directory=SERVER_ROOT, **kwargs)
+    try:
+      super().__init__(*args, directory=SERVER_ROOT, **kwargs)
+    except Exception as handler_err:
+      # These are mostly (always?) due to connections being forcibly closed by the app; no big
+      # deal and safe to ignore.
+      # sys.stderr.write('Handler error: ' + str(handler_err) + '\n')
+      pass
 
   def log_message(self, format, *args):
     pass
@@ -91,7 +100,7 @@ class Server(QThread):
 
   def run(self):
     try:
-      with TCPServer(("", self.port), HTTPHandler) as self._server:
+      with ThreadingServer(('0.0.0.0', self.port), HTTPHandler) as self._server:
         self.started.emit()
         self._server.serve_forever()
     except Exception as err:

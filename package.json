@@ -5,11 +5,12 @@
     "rimraf": "^5.0.5"
   },
   "scripts": {
+    "check-for-rimraf": "node tools/check-for-rimraf.js",
     "start": "python bmsnavserver.py",
     "start:mac": "python3 bmsnavserver.py",
     "package": "pyinstaller --onefile bmsnavserver.py --windowed",
-    "clean": "rimraf build && rimraf dist && rimraf serve && rimraf bmsnavserver.spec",
-    "html": "python tools\\readme-to-html.py",
+    "clean": "npm run check-for-rimraf && rimraf build && rimraf dist && rimraf serve && rimraf bmsnavserver.spec",
+    "html": "python tools/readme-to-html.py",
     "html:mac": "python3 tools/readme-to-html.py"
   }
 }
