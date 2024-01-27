@@ -4,7 +4,7 @@ BMSNav is a companion app for the [Falcon BMS](https://www.falcon-bms.com/) flig
 
 Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). It also monitors the briefings directory and grabs the latest HTML file whenever a change is made (when the user "prints" the briefing in BMS). As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're good to go!
 
-[FOR APP STORE REVIEWERS](#reviewers)  
+[NOTE FOR APP STORE REVIEWERS](#reviewers)  
 [Installation](#installation)  
 [Usage](#usage)  
 [Donations](#donations)  
@@ -16,9 +16,12 @@ Note that in order to use BMSNav, you must run the accompanying server (BMSNavSe
 <a name="reviewers"><a/>
 ## Important Note for App Store Reviewers
 
-As noted above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click "Save" to apply.
+As mentioned above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click the back button or "Save" to apply.
 
 Once in demo mode, the kneeboards and the briefing will be "static" and served from a host on the Internet. It should give you a good idea of what users will see when connected to an actual server.
+
+<img src="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" height="540" width="405"/>
+<img src="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" height="540" width="405"/>
 
 <a name="installation"></a>
 ## Installation
@@ -36,6 +39,29 @@ The latest server release can be downloaded here. Simply unzip the file and plac
 
 #### BMSNav
 
+There are four main screens in BMSNav: Left Board, Briefing, Notepad, and Right Board, all of which are fairly self-explanatory.
+
+The Left and Right Board screens display the left and right kneeboards, respectively (up to 16 pages each). Swipe left or right to navigate between pages, and pinch if you need to zoom-in. The number of pages displayed for each board is independently configurable via the settings panel (gear icon on the top right). This is helpful, for example, if you only have, six kneeboards on the left side and you don't wish to scroll through 10 blank pages.
+
+BMSNav integrates seamlessly with Weapon Delivery Planner and anything else that generates kneeboards. When you update/save the kneeboards in WDP, BMSNavServer will automatically serve the new images. Note that you'll have to refresh the screen in the app to see the updated kneeboards (the refresh icon on the top right, next to the gear icon).
+
+<img src="http://rsedevnet.github.io/bmsnav/images/datacard.jpg" height="540" width="405"/>
+
+The Briefing screen displays an HTML version of the mission briefing. Like the kneeboards, when you update the briefing by clicking "Print" in the 2D mission screen (on the briefing panel), the server will automatically serve the new HTML file. And again, you'll need to refresh the screen in the app in order to see the updated briefing. You will also need to enabled the "Briefing Output to File" and "HTML Briefings" options in the BMS configuration tool.
+
+<img src="http://rsedevnet.github.io/bmsnav/images/briefing.png" height="540" width="405"/>
+
+Finally, the Notepad screen is for taking notes, either during the mission or beforehand. Flight lead mentions something important during the briefing that isn't on the kneeboards? Write it down on the notepad. JTAC coordinates for a target strike? Write it down on... you get the idea.
+
+Note that the functionality differs somewhat between iOS and Android; the former being the more "full-featured" experience.
+
+With regard to input, you _can_ use your finger, but you'll be much happier with a stylus. And rest assured that you don't need to spend >$100 for an Apple stylus. I use one of these with my iPad ($30 on Amazon; link below). It works great!
+
+[https://www.amazon.com/dp/B08Z7LGR1L](https://www.amazon.com/dp/B08Z7LGR1L)
+
+It doesn't work on my Android tablet, however. I'm no expert when it comes to Android devices, so I'll leave you to figure out on your own what sort of stylus you need for that. Sorry. :\
+
+<img src="http://rsedevnet.github.io/bmsnav/images/notepad.png" height="540" width="405"/>
 
 #### BMSNavServer
 
@@ -53,6 +79,10 @@ If for some reason you need to run the server on a port other that 2676, simply 
 Note that you may need to _add_ the "port" property if it doesn't exist.
 
 Restart the server for any config changes to take effect.
+
+Once the server is up and running, you'll need to configure the relevant settings in the mobile app. Click on the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.
+
+<img src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" width="405"/>
 
 <a name="donations"></a>
 ## Donations
