@@ -2,7 +2,7 @@
 
 BMSNav is a companion app for the [Falcon BMS](https://www.falcon-bms.com/) flight simulator that displays kneeboards, briefings, and various navigation aids on a mobile device. It was built primarily to act as a sort of physical kneeboard, obviating the need to activate the pilot model and to flip through the in-game kneeboards. I use it myself on every mission that I fly, and that was the impetus, in fact. It's something that I wanted, but which didn't exist.
 
-Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). It also monitors the briefings directory and grabs the latest HTML file whenever a change is made (when the user "prints" the briefing in BMS). As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're good to go!
+Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). It also monitors the briefings directory and grabs the latest HTML file whenever a change is made (when the user "prints" the briefing in BMS). As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're set!
 
 [NOTE FOR APP STORE REVIEWERS](#reviewers)  
 [Installation](#installation)  
@@ -55,11 +55,11 @@ Finally, the Notepad screen is for taking notes, either during the mission or be
 
 Note that the functionality differs somewhat between iOS and Android; the former being the more "full-featured" experience.
 
-With regard to input, you _can_ use your finger, but you'll be much happier with a stylus. And rest assured that you don't need to spend >$100 for an Apple stylus. I use one of these with my iPad ($30 on Amazon; link below). It works great!
+With regard to input, you _can_ use your finger, but you'll be much happier with a stylus. And rest assured that you don't need to spend a lot of money on an expensive one. I use one of these with my iPad (link below). It was $30 on Amazon and it works great.
 
 [https://www.amazon.com/dp/B08Z7LGR1L](https://www.amazon.com/dp/B08Z7LGR1L)
 
-It doesn't work on my Android tablet, however. I'm no expert when it comes to Android devices, so I'll leave you to figure out on your own what sort of stylus you need for that. Sorry. :\
+Well, it doesn't work on my Android tablet. I'm no expert when it comes to Android devices, so I'll leave you to figure out on your own what sort of stylus you need for that. Sorry. :\
 
 <img src="http://rsedevnet.github.io/bmsnav/images/notepad.png" height="540" width="405"/>
 
