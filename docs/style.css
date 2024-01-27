@@ -15,12 +15,13 @@ body {
   body {
     padding: 5px;
   }
-  body>#content {
-    padding: 0px 20px 20px 20px !important;
+
+  body > div {
+    padding: 0px 10px 10px 10px !important;
   }
 }
 
-body>#content {
+body > div {
   margin: 0px;
   max-width: 900px;
   padding: 10px 24px;
@@ -150,7 +151,7 @@ img {
   max-width: 100%;
 }
 
-h1 > img {
+h1 img {
   margin-left: -20px;
 }
 

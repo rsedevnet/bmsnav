@@ -8,6 +8,8 @@
     "start": "python bmsnavserver.py",
     "start:mac": "python3 bmsnavserver.py",
     "package": "pyinstaller --onefile bmsnavserver.py --windowed",
-    "clean": "rimraf build && rimraf dist && rimraf serve && rimraf bmsnavserver.spec"
+    "clean": "rimraf build && rimraf dist && rimraf serve && rimraf bmsnavserver.spec",
+    "html": "python tools\readme-to-html.py",
+    "html:mac": "python3 tools/readme-to-html.py"
   }
 }
