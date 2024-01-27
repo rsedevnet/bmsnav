@@ -169,4 +169,4 @@ License: [http://creativecommons.org/licenses/by-nc-sa/3.0](http://creativecommo
 <a name="privacy"></a>
 ## Privacy
 
-BMSNav does _not_ store any data related to its users, period.
+BMSNav does _not_ collect or store any data related to its users, period.
