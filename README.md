@@ -13,7 +13,7 @@ Note that in order to use BMSNav, you must run the accompanying server (BMSNavSe
 [License](#license)  
 [FalconDED Font](#font)
 
-<a name="reviewers"><a/>
+<a name="reviewers"></a>
 ## Important Note for App Store Reviewers
 
 As mentioned above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click the back button or "Save" to apply.
