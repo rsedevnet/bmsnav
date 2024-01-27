@@ -81,7 +81,7 @@ Note that you may need to _add_ the "port" property if it doesn't exist.
 
 Restart the server for any config changes to take effect.
 
-Once the server is up and running, you'll need to configure the relevant settings in the mobile app. Click on the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.
+Once the server is up and running, you'll need to configure the relevant settings in the mobile app. Click the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.
 
 <img src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" width="405"/>
 
