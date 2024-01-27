@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@octokit/core": "^5.1.0",
+    "archiver": "^6.0.1",
     "pretty": "^2.0.0",
     "rimraf": "^5.0.5"
   },
@@ -8,7 +9,8 @@
     "check-for-rimraf": "node tools/check-for-rimraf.js",
     "start": "python bmsnavserver.py",
     "start:mac": "python3 bmsnavserver.py",
-    "package": "pyinstaller --onefile bmsnavserver.py --windowed",
+    "package-zip": "node tools/package-zip.js",
+    "package": "pyinstaller -i resources/icon.ico --onefile bmsnavserver.py --name BMSNavServer --windowed && npm run package-zip",
     "clean": "npm run check-for-rimraf && rimraf build && rimraf dist && rimraf serve && rimraf bmsnavserver.spec",
     "html": "python tools/readme-to-html.py",
     "html:mac": "python3 tools/readme-to-html.py"

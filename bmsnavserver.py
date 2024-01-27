@@ -478,7 +478,7 @@ class Window(QMainWindow):
 
   def doc_open(self):
     try:
-      QDesktopServices.openUrl(QUrl('https://github.com/doomsean/bmsnav'))
+      QDesktopServices.openUrl(QUrl('https://rsedev.net/bmsnav'))
     except Exception as doc_err:
       self.console_append('Unable to open documentation website: ' + str(doc_err))
 
@@ -564,7 +564,7 @@ class Window(QMainWindow):
     self.dds_converter.start()
 
     if "7997.dds" in path:
-      self.converter.finished.connect(self._on_conversion_finished)
+      self.dds_converter.finished.connect(self._on_dds_conversion_finished)
 
   def _on_dds_conversion_finished(self):
     if not self.dds_converter_err:
