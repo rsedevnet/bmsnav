@@ -14,7 +14,7 @@ Note that in order to use BMSNav, you must run the accompanying server (BMSNavSe
 [FalconDED Font](#font)  
 [Privacy](#privacy)
 
-<a name="reviewers"></a>
+<a id="reviewers"></a>
 ## Important Note for App Store Reviewers
 
 As mentioned above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click the back button or "Save" to apply.
@@ -24,7 +24,7 @@ Once in demo mode, the kneeboards and the briefing will be "static" and served f
 <img src="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" height="540" width="405"/>
 <img src="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" height="540" width="405"/>
 
-<a name="installation"></a>
+<a id="installation"></a>
 ## Installation
 
 #### BMSNav
@@ -35,7 +35,7 @@ The BMSNav mobile app will soon be availble for both iOS and Android devices via
 
 The latest server release can be downloaded here. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed.
 
-<a name="usage"></a>
+<a id="usage"></a>
 ## Usage
 
 #### BMSNav
@@ -85,7 +85,7 @@ Once the server is up and running, you'll need to configure the relevant setting
 
 <img src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" width="405"/>
 
-<a name="donations"></a>
+<a id="donations"></a>
 ## Donations
 
 If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you very much!
@@ -93,7 +93,7 @@ If you find this app useful, please consider donating. Any amount is greatly app
 PayPal: [seidemiller@gmail.com](https://paypal.me/seidemiller)  
 Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@seidemiller)
 
-<a name="development"></a>
+<a id="development"></a>
 ## Development
 
 The source code for the mobile app (iOS and Android) is kept in a private repository.
@@ -141,13 +141,13 @@ Just as the packaged executable, it will attempt to locate the Falcon BMS home d
 npm run package
 ```
 
-<a name="contact"></a>
+<a id="contact"></a>
 ## Contact
 
 Email: seidemiller@gmail.com  
 Falcon Lounge: Terminus
 
-<a name="license"></a>
+<a id="license"></a>
 ## MIT License
 
 Copyright (c) 2024 Sean Eidemiller
@@ -158,7 +158,7 @@ The above copyright notice and this permission notice shall be  included in all 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-<a name="font"></a>
+<a id="font"></a>
 ## FalconDED Font
 
 The FalconDED font used in the logo was created by ura_ba and licensed under Creative Commons Attribution Non-commercial Share Alike.
@@ -166,7 +166,7 @@ The FalconDED font used in the logo was created by ura_ba and licensed under Cre
 Home: [https://fontstruct.com/fontstructions/show/1014500](https://fontstruct.com/fontstructions/show/1014500)  
 License: [http://creativecommons.org/licenses/by-nc-sa/3.0](http://creativecommons.org/licenses/by-nc-sa/3.0)
 
-<a name="privacy"></a>
+<a id="privacy"></a>
 ## Privacy
 
 BMSNav does _not_ collect or store any data related to its users, period.
