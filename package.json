@@ -1,5 +1,7 @@
 {
   "devDependencies": {
+    "@octokit/core": "^5.1.0",
+    "pretty": "^2.0.0",
     "rimraf": "^5.0.5"
   },
   "scripts": {

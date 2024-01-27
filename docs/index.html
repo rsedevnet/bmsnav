@@ -1,7 +1,118 @@
 <html>
-<head>
-  <meta http-equiv="refresh" content="0; URL=https://github.com/rsedevnet/bmsnav"/>
-</head>
-<body>
-</body>
+  <head>
+    <title>BMSNav</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id='content'>
+      <h1 id="img-srchttpsrsedevnetgithubiobmsnavimagesiconpng-height128-width128"><img src="https://rsedevnet.github.io/bmsnav/images/icon.png" height="128" width="128"/></h1>
+      <p>BMSNav is a companion app for the <a href="https://www.falcon-bms.com/">Falcon BMS</a> flight simulator that displays kneeboards, briefings, and various navigation aids on a mobile device. It was built primarily to act as a sort of physical kneeboard, obviating the need to activate the pilot model and to flip through the in-game kneeboards. I use it myself on every mission that I fly, and that was the impetus, in fact. It's something that I wanted, but which didn't exist.</p>
+      <p>Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in <a href="https://www.weapondeliveryplanner.nl/">Weapon Delivery Planner</a>. It also monitors the briefings directory and grabs the latest HTML file whenever a change is made (when the user "prints" the briefing in BMS). As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're good to go!</p>
+      <p><a href="#reviewers">NOTE FOR APP STORE REVIEWERS</a>  <br />
+        <a href="#installation">Installation</a>  <br />
+        <a href="#usage">Usage</a>  <br />
+        <a href="#donations">Donations</a>  <br />
+        <a href="#development">Development</a>  <br />
+        <a href="#contact">Contact</a>  <br />
+        <a href="#license">License</a>  <br />
+        <a href="#font">FalconDED Font</a>
+      </p>
+      <p><a name="reviewers"></a></p>
+      <h2 id="important-note-for-app-store-reviewers">Important Note for App Store Reviewers</h2>
+      <p>As mentioned above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click the back button or "Save" to apply.</p>
+      <p>Once in demo mode, the kneeboards and the briefing will be "static" and served from a host on the Internet. It should give you a good idea of what users will see when connected to an actual server.</p>
+      <p><img src="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" height="540" width="405"/><br />
+        <img src="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" height="540" width="405"/>
+      </p>
+      <p><a name="installation"></a></p>
+      <h2 id="installation">Installation</h2>
+      <h4 id="bmsnav">BMSNav</h4>
+      <p>The BMSNav mobile app will soon be availble for both iOS and Android devices via the Apple Store and the Google Play Console. Details to come…</p>
+      <h4 id="bmsnavserver">BMSNavServer</h4>
+      <p>The latest server release can be downloaded here. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). It's that simple.</p>
+      <p><a name="usage"></a></p>
+      <h2 id="usage">Usage</h2>
+      <h4 id="bmsnav-1">BMSNav</h4>
+      <p>There are four main screens in BMSNav: Left Board, Briefing, Notepad, and Right Board, all of which are fairly self-explanatory.</p>
+      <p>The Left and Right Board screens display the left and right kneeboards, respectively (up to 16 pages each). Swipe left or right to navigate between pages, and pinch if you need to zoom-in. The number of pages displayed for each board is independently configurable via the settings panel (gear icon on the top right). This is helpful, for example, if you only have, six kneeboards on the left side and you don't wish to scroll through 10 blank pages.</p>
+      <p>BMSNav integrates seamlessly with Weapon Delivery Planner and anything else that generates kneeboards. When you update/save the kneeboards in WDP, BMSNavServer will automatically serve the new images. Note that you'll have to refresh the screen in the app to see the updated kneeboards (the refresh icon on the top right, next to the gear icon).</p>
+      <p><img src="http://rsedevnet.github.io/bmsnav/images/datacard.jpg" height="540" width="405"/></p>
+      <p>The Briefing screen displays an HTML version of the mission briefing. Like the kneeboards, when you update the briefing by clicking "Print" in the 2D mission screen (on the briefing panel), the server will automatically serve the new HTML file. And again, you'll need to refresh the screen in the app in order to see the updated briefing. You will also need to enabled the "Briefing Output to File" and "HTML Briefings" options in the BMS configuration tool.</p>
+      <p><img src="http://rsedevnet.github.io/bmsnav/images/briefing.png" height="540" width="405"/></p>
+      <p>Finally, the Notepad screen is for taking notes, either during the mission or beforehand. Flight lead mentions something important during the briefing that isn't on the kneeboards? Write it down on the notepad. JTAC coordinates for a target strike? Write it down on… you get the idea.</p>
+      <p>Note that the functionality differs somewhat between iOS and Android; the former being the more "full-featured" experience.</p>
+      <p>With regard to input, you <em>can</em> use your finger, but you'll be much happier with a stylus. And rest assured that you don't need to spend &gt;$100 for an Apple stylus. I use one of these with my iPad ($30 on Amazon; link below). It works great!</p>
+      <p><a href="https://www.amazon.com/dp/B08Z7LGR1L">https://www.amazon.com/dp/B08Z7LGR1L</a></p>
+      <p>It doesn't work on my Android tablet, however. I'm no expert when it comes to Android devices, so I'll leave you to figure out on your own what sort of stylus you need for that. Sorry. :\</p>
+      <p><img src="http://rsedevnet.github.io/bmsnav/images/notepad.png" height="540" width="405"/></p>
+      <h4 id="bmsnavserver-1">BMSNavServer</h4>
+      <p>To start the server, click on the <code>BMSNavServer.exe</code> file in the directory that was unzipped per the instructions in the <a href="#installation">Installation</a> section above. This should open a new window. The server will attempt to generate the kneeboards for the selected theater (default is Korea) and the most recently saved briefing (irrespective of theater). The kneeboards and the briefing will then be made available via HTTP on the default port of 2676, unless overridden in the config file (<code>config.json</code>). Additionally, the server will monitor both the briefings directory and the kneeboards for the selected theater. If any changes are made, whether by BMS or Weapon Delivery Planner, the kneeboards and/or briefing will be regenerated and re-served automatically. You do <em>not</em> need to restart the server when, for example, the kneeboards are saved in WDP.</p>
+      <p>If for some reason you need to run the server on a port other that 2676, simply open the <code>config.json</code> file in the same directory as the executable and set the port as desired. For example…</p>
+      <pre><code><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;selectedTheater&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Korea&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;port&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8000</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+      <p>Note that you may need to <em>add</em> the "port" property if it doesn't exist.</p>
+      <p>Restart the server for any config changes to take effect.</p>
+      <p>Once the server is up and running, you'll need to configure the relevant settings in the mobile app. Click on the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.</p>
+      <p><img src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" width="405"/></p>
+      <p><a name="donations"></a></p>
+      <h2 id="donations">Donations</h2>
+      <p>If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you very much!</p>
+      <p>PayPal: <a href="https://paypal.me/seidemiller">seidemiller@gmail.com</a>  <br />
+        Venmo: <a href="https://venmo.com/?txn=pay&audience=private&recipients=@seidemiller">@seidemiller</a>
+      </p>
+      <p><a name="development"></a></p>
+      <h2 id="development">Development</h2>
+      <p>The source code for the mobile app (iOS and Android) is kept in a private repository.</p>
+      <p>The source code for the <em>server</em> is kept here in this repository. It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the <a href="https://github.com/root0fall/kneeboard-extractor">kneeboard-extractor</a> project by root0fall.</p>
+      <h4 id="requirements">Requirements</h4>
+      <ul>
+        <li>Windows 10/11 (have not tested with earlier versions)</li>
+        <li>Falcon BMS (obviously)</li>
+        <li>Node (preferably LTS)</li>
+        <li>Python3</li>
+        <li>Git</li>
+        <li>PyQt5</li>
+        <li>PyInstaller</li>
+        <li>pillow</li>
+      </ul>
+      <p>You can install Node, Python and Git by whichever method you choose. To install the required Python libraries…</p>
+      <pre><code>pip <span class="hljs-keyword">install</span> PyQt5
+pip <span class="hljs-keyword">install</span> PyInstaller
+pip <span class="hljs-keyword">install</span> pillow
+</code></pre>
+      <h4 id="retrieving-dependencies">Retrieving Dependencies</h4>
+      <p>You only need to run this once, or after running <code>npm run clean</code>.</p>
+      <pre><code>npm <span class="hljs-keyword">install</span>
+</code></pre>
+      <h4 id="running-the-server">Running the Server</h4>
+      <pre><code>npm <span class="hljs-built_in">run</span> start
+</code></pre>
+      <p>Just as the packaged executable, it will attempt to locate the Falcon BMS home directory and use that as the root for locating the kneeboard files for the selected theater. </p>
+      <h4 id="packaging-the-executable">Packaging the Executable</h4>
+      <pre><code>npm run <span class="hljs-keyword">package</span>
+<span class="hljs-title"></span></code></pre>
+      <p><a name="contact"></a></p>
+      <h2 id="contact">Contact</h2>
+      <p>Email: seidemiller@gmail.com  <br />
+        Falcon Lounge: Terminus
+      </p>
+      <p><a name="license"></a></p>
+      <h2 id="mit-license">MIT License</h2>
+      <p>Copyright (c) 2024 Sean Eidemiller</p>
+      <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+      <p>The above copyright notice and this permission notice shall be  included in all copies or substantial portions of the Software.</p>
+      <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      <p><a name="font"></a></p>
+      <h2 id="falconded-font">FalconDED Font</h2>
+      <p>The FalconDED font used in the logo was created by ura_ba and licensed under Creative Commons Attribution Non-commercial Share Alike.</p>
+      <p>Home: <a href="https://fontstruct.com/fontstructions/show/1014500">https://fontstruct.com/fontstructions/show/1014500</a>  <br />
+        License: <a href="http://creativecommons.org/licenses/by-nc-sa/3.0">http://creativecommons.org/licenses/by-nc-sa/3.0</a>
+      </p>
+    </div>
+  </body>
 </html>
