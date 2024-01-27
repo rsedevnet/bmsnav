@@ -100,7 +100,7 @@ class Server(QThread):
 
   def run(self):
     try:
-      with ThreadingServer(('0.0.0.0', self.port), HTTPHandler) as self._server:
+      with ThreadingServer(('', self.port), HTTPHandler) as self._server:
         self.started.emit()
         self._server.serve_forever()
     except Exception as err:
