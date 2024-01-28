@@ -33,7 +33,7 @@ The BMSNav mobile app will soon be availble for both iOS and Android devices via
 
 #### BMSNavServer
 
-The latest server release can be downloaded here. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed.
+The latest server release can be downloaded from the [Releases](https://github.com/rsedevnet/bmsnav/releases) page on GitHub. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed.
 
 <a id="usage"></a>
 ## Usage
