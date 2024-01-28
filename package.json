@@ -10,7 +10,7 @@
     "start": "python bmsnavserver.py",
     "start:mac": "python3 bmsnavserver.py",
     "package-zip": "node tools/package-zip.js",
-    "package": "pyinstaller -i resources/icon.ico --onefile bmsnavserver.py --name BMSNavServer --windowed && npm run package-zip",
+    "package": "pyinstaller --onefile bmsnavserver.py --name BMSNavServer --windowed && npm run package-zip",
     "clean": "npm run check-for-rimraf && rimraf build && rimraf dist && rimraf serve && rimraf bmsnavserver.spec",
     "html": "python tools/readme-to-html.py",
     "html:mac": "python3 tools/readme-to-html.py"
