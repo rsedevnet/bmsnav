@@ -7,9 +7,9 @@ Note that in order to use BMSNav, you must run the accompanying server (BMSNavSe
 [NOTE FOR APP STORE REVIEWERS](#reviewers)  
 [Installation](#installation)  
 [Usage](#usage)  
-[Donations](#donations)  
 [Development](#development)  
 [Contact](#contact)  
+[Donations](#donations)  
 [License](#license)  
 [FalconDED Font](#font)  
 [Privacy](#privacy)
@@ -85,14 +85,6 @@ Once the server is up and running, you'll need to configure the relevant setting
 
 <img src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" width="405"/>
 
-<a id="donations"></a>
-## Donations
-
-If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you very much!
-
-PayPal: [seidemiller@gmail.com](https://paypal.me/seidemiller)  
-Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@seidemiller)
-
 <a id="development"></a>
 ## Development
 
@@ -144,8 +136,21 @@ npm run package
 <a id="contact"></a>
 ## Contact
 
-Email: seidemiller@gmail.com  
-Falcon Lounge: Terminus
+Sean Eidemiller  
+seidemiller@gmail.com  
+Terminus (Falcon Lounge)
+
+#### About Me
+
+Bay Area, California. Into guitar, black metal, cycling, motorcycles, sci-fi/fantasy, Sumo, and, of course, hardcore sims. :p
+
+<a id="donations"></a>
+## Donations
+
+If you find this app useful, please consider donating. Any amount is greatly appreciated and helps to pay for things like app store/developer accounts. Thank you very much!
+
+PayPal: [seidemiller@gmail.com](https://paypal.me/seidemiller)  
+Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@seidemiller)
 
 <a id="license"></a>
 ## MIT License
