@@ -5,6 +5,7 @@ import ntpath
 import winreg
 import fnmatch
 import subprocess
+import time
 
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from socketserver import TCPServer, ThreadingMixIn
@@ -114,9 +115,10 @@ class Server(QThread):
 class DDSConverter(QThread):
   error = pyqtSignal(Exception)
 
-  def __init__(self, dds_path):
+  def __init__(self, dds_path, dds_monitor=None):
     super(DDSConverter, self).__init__()
     self.dds_path = dds_path
+    self.dds_monitor = dds_monitor
 
   def run(self):
     try:
@@ -125,15 +127,22 @@ class DDSConverter(QThread):
           dds_file = os.path.join(self.dds_path, f'{i}.dds')
           self.convert(dds_file)
       else:
-        self.convert(self.dds_path)
+        self.convert(self.dds_path, True)
 
     except Exception as err:
       self.error.emit(err)
+    finally:
+      if self.dds_monitor:
+        self.dds_monitor.restart(None)
 
   def stop(self):
     self.wait()
 
-  def convert(self, dds_file):
+  def convert(self, dds_file, sleep=False):
+    # This is a really hacky way of waiting for WDP to recreate the DDS file.
+    if sleep:
+      time.sleep(1)
+
     dds_index = int(ntpath.basename(dds_file).split('.')[0])
     img_index = (dds_index - 7982) + 1
 
@@ -154,16 +163,17 @@ class DDSConverter(QThread):
     cropped.save(out_path, 'png')
 
 class DDSMonitor():
-  def __init__(self, bms_home_dir, on_change):
+  def __init__(self, bms_home_dir, dds_index, on_change):
     super(DDSMonitor, self).__init__()
     self.bms_home_dir = bms_home_dir
     self.on_change = on_change
     self.fs_watcher = None
-    self.kneeboards = []
+    self.kneeboard_file = None
+    self.dds_index = dds_index
     self.dds_dir = None
 
-  def _get_kneeboards(self, selected_theater):
-    kneeboards = []
+  def _get_kneeboard_file(self, selected_theater):
+    kneeboard_file = None
     dds_dir = None
     addon_dir = selected_theater['addOnDir']
 
@@ -172,33 +182,32 @@ class DDSMonitor():
     else:
       dds_dir = os.path.join(self.bms_home_dir, 'Data', 'TerrData', 'Objects', 'KoreaObj')
 
-    for i in range(7982, 7998):
-      kneeboards.append(os.path.join(dds_dir, f'{i}.dds'))
+    kneeboard_file = os.path.join(dds_dir, f'{self.dds_index}.dds')
 
-    return kneeboards, dds_dir
+    return kneeboard_file, dds_dir
 
   def start(self, selected_theater):
-    kneeboards, dds_dir = self._get_kneeboards(selected_theater)
-    self.kneeboards = kneeboards
+    kneeboard_file, dds_dir = self._get_kneeboard_file(selected_theater)
+    self.kneeboard_file = kneeboard_file
     self.dds_dir = dds_dir
-    self.fs_watcher = QFileSystemWatcher(kneeboards)
+    self.fs_watcher = QFileSystemWatcher([self.kneeboard_file])
     self.fs_watcher.fileChanged.connect(self.on_change)
 
     return dds_dir
 
   def restart(self, selected_theater):
-    kneeboards = self.kneeboards
+    kneeboard_file = self.kneeboard_file
     dds_dir = self.dds_dir
 
-    if kneeboards and self.fs_watcher.files():
-      self.fs_watcher.removePaths(kneeboards)
+    if kneeboard_file and self.fs_watcher.files():
+      self.fs_watcher.removePaths([kneeboard_file])
 
     if selected_theater:
-      kneeboards, dds_dir = self._get_kneeboards(selected_theater)
-      self.kneeboards = kneeboards
+      kneeboard_file, dds_dir = self._get_kneeboard_file(selected_theater)
+      self.kneeboard_file = kneeboard_file
       self.dds_dir = dds_dir
 
-    self.fs_watcher.addPaths(kneeboards)
+    self.fs_watcher.addPaths([kneeboard_file])
 
     return dds_dir
 
@@ -239,26 +248,6 @@ class BriefingConverter(QThread):
   def stop(self):
     self.wait()
 
-  def convert(self, dds_file):
-    dds_index = int(ntpath.basename(dds_file).split('.')[0])
-    img_index = (dds_index - 7982) + 1
-
-    if img_index < 10:
-      img_index = f'0{str(img_index)}' 
-
-    out_left_path = os.path.join(SERVER_ROOT, f'l{img_index}.png')
-    out_right_path = os.path.join(SERVER_ROOT, f'r{img_index}.png')
-
-    with Image.open(dds_file) as img:
-      left_dims = (0 ,0, int(img.size[0] / 2), img.size[1])
-      right_dims = int(img.size[0] / 2), 0, img.size[0], img.size[1]
-      self.write_png(img, out_left_path, left_dims)
-      self.write_png(img, out_right_path, right_dims)
-
-  def write_png(self, img, out_path, dims):
-    cropped = img.crop(dims)
-    cropped.save(out_path, 'png')
-
 class BriefingMonitor(): 
   def __init__(self, bms_home_dir, on_change):
     super(BriefingMonitor, self).__init__()
@@ -280,9 +269,10 @@ class Window(QMainWindow):
   def __init__(self):
     super(Window, self).__init__()
 
-    self.dds_monitor = None
+    self.dds_monitors = []
     self.dds_dir = None
-    self.dds_converter = None
+    self.dds_converters = {}
+    self.dds_batch_converter = None
     self.dds_converter_err = None
     self.briefing_monitor = None
     self.briefing_converter = None
@@ -433,8 +423,10 @@ class Window(QMainWindow):
 
       if (not init_failed):
         try:
-          self.dds_monitor = DDSMonitor(bms_home, self._on_dds_change)
-          self.dds_dir = self.dds_monitor.start(self.selected_theater)
+          for i in range(7982, 7998):
+            monitor = DDSMonitor(bms_home, i, self._on_dds_change)
+            self.dds_dir = monitor.start(self.selected_theater)
+            self.dds_monitors.append(monitor)
           self.console_append('Monitoring kneeboard DDS files for changes.')
         except Exception as dds_monitor_err:
           self.console_append('Error monitoring kneeboard DDS files for changes: ' + str(dds_monitor_err), LogLevel.ERROR)
@@ -444,10 +436,10 @@ class Window(QMainWindow):
           self.console_append('Generating kneeboard images...')
 
           self.theater_combobox.setEnabled(False)
-          self.dds_converter = DDSConverter(self.dds_dir)
-          self.dds_converter.error.connect(self._on_dds_conversion_error)
-          self.dds_converter.finished.connect(self._on_dds_conversion_finished)
-          self.dds_converter.start()
+          self.dds_batch_converter = DDSConverter(self.dds_dir)
+          self.dds_batch_converter.error.connect(self._on_dds_conversion_error)
+          self.dds_batch_converter.finished.connect(self._on_dds_conversion_finished)
+          self.dds_batch_converter.start()
 
           self.server = Server(self.port)
           self.server.error.connect(self._on_server_error)
@@ -501,7 +493,6 @@ class Window(QMainWindow):
           raise reg_err
 
     except Exception as err:
-      sys.stderr.write(str(err))
       self.console_append('Error locating BMS directory from registry; specify with "bmsHome" in config.json file.', LogLevel.ERROR)
 
     return None
@@ -523,8 +514,9 @@ class Window(QMainWindow):
 
       self.selected_theater = theater
 
-      if self.dds_monitor:
-        self.dds_dir = self.dds_monitor.restart(theater)
+      if self.dds_monitors:
+        for m in self.dds_monitors:
+          m.restart(theater)
 
       config = None
       config_file = None
@@ -550,21 +542,29 @@ class Window(QMainWindow):
           config_file.close()
 
       self.theater_combobox.setEnabled(False)
-      self.dds_converter = DDSConverter(self.dds_dir)
-      self.dds_converter.error.connect(self._on_dds_conversion_error)
-      self.dds_converter.finished.connect(self._on_dds_conversion_finished)
-      self.dds_converter.start()
+      self.dds_batch_converter = DDSConverter(self.dds_dir)
+      self.dds_batch_converter.error.connect(self._on_dds_conversion_error)
+      self.dds_batch_converter.finished.connect(self._on_dds_conversion_finished)
+      self.dds_batch_converter.start()
 
   def _on_dds_change(self, path):
-    if "7982.dds" in path:
+    if '7982.dds' in path:
       self.console_append('Kneeboard DDS file(s) changed; regenerating images...') 
       self.theater_combobox.setEnabled(False)
 
-    self.dds_converter = DDSConverter(path)
-    self.dds_converter.start()
+    dds_index = int(ntpath.basename(path).split('.')[0])
 
-    if "7997.dds" in path:
-      self.dds_converter.finished.connect(self._on_dds_conversion_finished)
+    monitor_index = dds_index - 7982;
+    monitor = self.dds_monitors[monitor_index]
+
+    converter = DDSConverter(path, monitor)
+    converter.error.connect(self._on_dds_conversion_error)
+    converter.start()
+
+    if '7997.dds' in path:
+      converter.finished.connect(self._on_dds_conversion_finished)
+
+    self.dds_converters[dds_index] = converter
 
   def _on_dds_conversion_finished(self):
     if not self.dds_converter_err:
@@ -573,7 +573,6 @@ class Window(QMainWindow):
       self.console_append('Error generating kneeboard image(s): ' + str(self.dds_converter_err), LogLevel.ERROR)
 
     self.theater_combobox.setEnabled(True)
-    self.dds_monitor.restart(None)
     self.dds_converter_err = None
 
   def _on_dds_conversion_error(self, err):
