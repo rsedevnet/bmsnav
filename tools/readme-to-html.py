@@ -36,7 +36,8 @@ try:
 
   with open(html_out, 'r+') as file:
     contents = file.readlines()
-    contents.insert(3, '<title>BMSNav</title>\n')
+    contents.insert(3, '<meta name="viewport" content="width=device-width, initial-scale=1.0"/>\n')
+    contents.insert(4, '<title>BMSNav</title>\n')
     file.seek(0)
     file.writelines(contents)
 
