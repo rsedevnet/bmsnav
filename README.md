@@ -4,7 +4,6 @@ BMSNav is a companion app for the [Falcon BMS](https://www.falcon-bms.com/) flig
 
 Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in [Weapon Delivery Planner](https://www.weapondeliveryplanner.nl/). It also monitors the briefings directory and grabs the latest HTML file whenever the user "prints" the briefing in BMS. As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're set!
 
-[NOTE FOR APP STORE REVIEWERS](#reviewers)  
 [Installation](#installation)  
 [Usage](#usage)  
 [Development](#development)  
@@ -13,16 +12,6 @@ Note that in order to use BMSNav, you must run the accompanying server (BMSNavSe
 [License](#license)  
 [FalconDED Font](#font)  
 [Privacy](#privacy)
-
-<a id="reviewers"></a>
-## Important Note for App Store Reviewers
-
-As mentioned above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click the back button or "Save" to apply.
-
-Once in demo mode, the kneeboards and the briefing will be "static" and served from a host on the Internet. It should give you a good idea of what users will see when connected to an actual server.
-
-<img src="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" height="540" width="405"/>
-<img src="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" height="540" width="405"/>
 
 <a id="installation"></a>
 ## Installation
@@ -35,7 +24,11 @@ The Android version works just fine, but Google has made it significantly more d
 
 #### BMSNavServer
 
-The latest server release can be downloaded from the [Releases](https://github.com/rsedevnet/bmsnav/releases) page on GitHub. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed.
+Latest server release: [BMSNavServer-1.0.0,zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.0/BMSNavServer-1.0.0.zip)
+
+Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start ```BMSNavServer.exe``` for the first time, two things are likely to happen...
+* Windows will ask if you want to allow the app to accept network connections. Say yes.
+* Windows Defender and/or whatever antivirus software you have installed will flag the app as suspicious, and possibly even quarantine the executable. I use AVG, personally. On first invocation, AVG launches the app in sandbox mode, performs a scan, and, when it finds nothing wrong, the app restarts normally. BMSNavServer is obviously not malware.
 
 <a id="usage"></a>
 ## Usage
@@ -96,7 +89,7 @@ The source code for the _server_ is kept here in this repository. It's a Python 
 
 #### Requirements
 
-* Windows 10/11 (have not tested with earlier versions)
+* Windows 11 (should work on 10, but untested)
 * Falcon BMS (obviously)
 * Node (preferably LTS)
 * Python3
