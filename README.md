@@ -24,7 +24,7 @@ The Android version works just fine, but Google has made it significantly more d
 
 #### BMSNavServer
 
-Latest server release: [BMSNavServer-1.0.0,zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.0/BMSNavServer-1.0.0.zip)
+Latest server release: [BMSNavServer-1.0.1,zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.1/BMSNavServer-1.0.1.zip)
 
 Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start ```BMSNavServer.exe``` for the first time, two things are likely to happen...
 * Windows will ask if you want to allow the app to accept network connections. Say yes.

@@ -4,7 +4,7 @@ const archiver = require('archiver');
 
 let zipFile;
 
-const zipPath = path.join('dist', 'BMSNavServer-1.0.0.zip');
+const zipPath = path.join('dist', 'BMSNavServer-1.0.1.zip');
 const exePath = path.join('dist', 'BMSNavServer.exe');
 const icoPath = path.join('dist', 'icon.ico');
 const licPath = path.join('dist', 'LICENSE.txt');
