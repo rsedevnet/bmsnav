@@ -29,7 +29,9 @@ Once in demo mode, the kneeboards and the briefing will be "static" and served f
 
 #### BMSNav
 
-The BMSNav mobile app will soon be availble for both iOS and Android devices via the Apple Store and the Google Play Console. Details to come...
+Available now for iOS [here](https://apps.apple.com/us/app/bmsnav/id6476798982), or search for "BMSNav" in the App Store on your iPhone or iPad.
+
+The Android version works just fine, but Google has made it significantly more difficult for indie devs to publish apps on the Google Play Console since November 2023. In short, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please [contact](#contact) me.
 
 #### BMSNavServer
 
