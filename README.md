@@ -18,7 +18,7 @@ Note that in order to use BMSNav, you must run the accompanying server (BMSNavSe
 
 #### BMSNav
 
-Available now for iOS [here](https://apps.apple.com/us/app/bmsnav/id6476798982), or search for "BMSNav" in the App Store on your iPhone or iPad.
+You can get BMSNav for iOS [here](https://apps.apple.com/us/app/bmsnav/id6476798982), or search for "BMSNav" in the App Store on your iPhone or iPad.
 
 The Android version works just fine, but Google has made it significantly more difficult for indie devs to publish apps on the Google Play Console since November 2023. In short, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please [contact](#contact) me.
 
