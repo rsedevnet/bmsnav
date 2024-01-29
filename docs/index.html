@@ -18,8 +18,7 @@
 <h1 id=""><a aria-hidden="true" class="anchor" href="#" id="" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="https://rsedevnet.github.io/bmsnav/images/icon.png" rel="noopener noreferrer nofollow" target="_blank"><img data-canonical-src="https://rsedevnet.github.io/bmsnav/images/icon.png" height="128" src="https://rsedevnet.github.io/bmsnav/images/icon.png" style="max-width: 100%;" width="128"/></a></h1>
 <p>BMSNav is a companion app for the <a href="https://www.falcon-bms.com/" rel="nofollow">Falcon BMS</a> flight simulator that displays kneeboards, briefings, and various navigation aids on a mobile device. It was built primarily to act as a sort of physical kneeboard, obviating the need to activate the pilot model and to flip through the in-game kneeboards.</p>
 <p>Note that in order to use BMSNav, you must run the accompanying server (BMSNavServer) on the same machine as BMS itself. The server monitors the kneeboard files for the selected theater and automatically [re]generates the images any time a change is made in <a href="https://www.weapondeliveryplanner.nl/" rel="nofollow">Weapon Delivery Planner</a>. It also monitors the briefings directory and grabs the latest HTML file whenever the user "prints" the briefing in BMS. As such, there's no need to copy/paste files or manually convert images and transfer them to your mobile device. Simply run the server, select a theater, and you're set!</p>
-<p><a href="#reviewers">NOTE FOR APP STORE REVIEWERS</a><br/>
-<a href="#installation">Installation</a><br/>
+<p><a href="#installation">Installation</a><br/>
 <a href="#usage">Usage</a><br/>
 <a href="#development">Development</a><br/>
 <a href="#contact">Contact</a><br/>
@@ -27,19 +26,18 @@
 <a href="#license">License</a><br/>
 <a href="#font">FalconDED Font</a><br/>
 <a href="#privacy">Privacy</a></p>
-<p><a href="" id="reviewers" name="reviewers"></a></p>
-<h2 id="important-note-for-app-store-reviewers"><a aria-hidden="true" class="anchor" href="#important-note-for-app-store-reviewers" id="important-note-for-app-store-reviewers" name="important-note-for-app-store-reviewers" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Important Note for App Store Reviewers</h2>
-<p>As mentioned above, the functionality of the app depends on access to a server running on the same machine as the game (Falcon BMS). There is, however, a "Demo Mode" for reviewers or those simply wishing to get an idea of how the app works, without having to install the game or the server. To enable the demo mode, click the settings (gear) icon on the top right of the screen and select "Demo Mode" at the bottom of the list. Then click the back button or "Save" to apply.</p>
-<p>Once in demo mode, the kneeboards and the briefing will be "static" and served from a host on the Internet. It should give you a good idea of what users will see when connected to an actual server.</p>
-<p><a href="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" rel="noopener noreferrer nofollow" target="_blank"><img data-canonical-src="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" height="540" src="http://rsedevnet.github.io/bmsnav/images/not-timed-out-helper.png" style="max-width: 100%;" width="405"/></a></p>
-<p><a href="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" rel="noopener noreferrer nofollow" target="_blank"><img data-canonical-src="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" height="540" src="http://rsedevnet.github.io/bmsnav/images/settings-demo-helper.png" style="max-width: 100%;" width="405"/></a></p>
 <p><a href="" id="installation" name="installation"></a></p>
 <h2 id="installation"><a aria-hidden="true" class="anchor" href="#installation" id="installation" name="installation" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 <h4 id="bmsnav"><a aria-hidden="true" class="anchor" href="#bmsnav" id="bmsnav" name="bmsnav" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>BMSNav</h4>
 <p>Available now for iOS <a href="https://apps.apple.com/us/app/bmsnav/id6476798982" rel="nofollow">here</a>, or search for "BMSNav" in the App Store on your iPhone or iPad.</p>
 <p>The Android version works just fine, but Google has made it significantly more difficult for indie devs to publish apps on the Google Play Console since November 2023. In short, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please <a href="#contact">contact</a> me.</p>
 <h4 id="bmsnavserver"><a aria-hidden="true" class="anchor" href="#bmsnavserver" id="bmsnavserver" name="bmsnavserver" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>BMSNavServer</h4>
-<p>The latest server release can be downloaded from the <a href="https://github.com/rsedevnet/bmsnav/releases">Releases</a> page on GitHub. Simply unzip the file and place the directory anywhere you like (again, on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed.</p>
+<p>Latest server release: <a href="https://github.com/rsedevnet/bmsnav/releases/download/v1.0.0/BMSNavServer-1.0.0.zip">BMSNavServer-1.0.0,zip</a></p>
+<p>Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start <code>BMSNavServer.exe</code> for the first time, two things are likely to happen...</p>
+<ul>
+<li>Windows will ask if you want to allow the app to accept network connections. Say yes.</li>
+<li>Windows Defender and/or whatever antivirus software you have installed will flag the app as suspicious, and possibly even quarantine the executable. I use AVG, personally. On first invocation, AVG launches the app in sandbox mode, performs a scan, and, when it finds nothing wrong, the app restarts normally. BMSNavServer is obviously not malware.</li>
+</ul>
 <p><a href="" id="usage" name="usage"></a></p>
 <h2 id="usage"><a aria-hidden="true" class="anchor" href="#usage" id="usage" name="usage" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 <h4 id="bmsnav-1"><a aria-hidden="true" class="anchor" href="#bmsnav-1" id="bmsnav-1" name="bmsnav-1" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>BMSNav</h4>
@@ -73,7 +71,7 @@
 <p>The source code for the <em>server</em> is kept here in this repository. It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the <a href="https://github.com/root0fall/kneeboard-extractor">kneeboard-extractor</a> project by root0fall.</p>
 <h4 id="requirements"><a aria-hidden="true" class="anchor" href="#requirements" id="requirements" name="requirements" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h4>
 <ul>
-<li>Windows 10/11 (have not tested with earlier versions)</li>
+<li>Windows 11 (should work on 10, but untested)</li>
 <li>Falcon BMS (obviously)</li>
 <li>Node (preferably LTS)</li>
 <li>Python3</li>
