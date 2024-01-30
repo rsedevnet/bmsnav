@@ -516,7 +516,7 @@ class Window(QMainWindow):
 
       if self.dds_monitors:
         for m in self.dds_monitors:
-          m.restart(theater)
+          self.dds_dir = m.restart(theater)
 
       config = None
       config_file = None
