@@ -24,7 +24,7 @@ The Android version works just fine, but Google has made it significantly more d
 
 #### BMSNavServer
 
-Latest server release: [BMSNavServer-1.0.1,zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.1/BMSNavServer-1.0.1.zip)
+Latest server release: [BMSNavServer-1.0.2,zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.2/BMSNavServer-1.0.2.zip)
 
 Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start ```BMSNavServer.exe``` for the first time, two things are likely to happen...
 * Windows will ask if you want to allow the app to accept network connections. Say yes.
@@ -92,18 +92,18 @@ The source code for the _server_ is kept here in this repository. It's a Python 
 * Windows 11 (should work on 10, but untested)
 * Falcon BMS (obviously)
 * Node (preferably LTS)
-* Python3
+* Python 3.11 (3.12 and later won't work with nuitka... yet)
 * Git
-* PyQt5
-* PyInstaller
-* pillow
+* PySide6
+* Pillow
+* Nuitka
 
 You can install Node, Python and Git by whichever method you choose. To install the required Python libraries...
 
 ```
-pip install PyQt5
-pip install PyInstaller
+pip install pyside6
 pip install pillow
+pip install nuitka
 ```
 
 #### Retrieving Dependencies
@@ -127,6 +127,8 @@ Just as the packaged executable, it will attempt to locate the Falcon BMS home d
 ```
 npm run package
 ```
+
+This will build the project and place the resulting zip file in the ```release``` directory.
 
 <a id="contact"></a>
 ## Contact

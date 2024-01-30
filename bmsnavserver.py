@@ -13,10 +13,9 @@ from enum import StrEnum
 from datetime import datetime
 
 from PIL import Image
-from PyQt5.Qt import QDesktopServices, QUrl
-from PyQt5.QtCore import QFileSystemWatcher, QThread, pyqtSignal
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import (
+from PySide6.QtCore import QFileSystemWatcher, QThread, QUrl, Signal
+from PySide6.QtGui import QDesktopServices, QFont
+from PySide6.QtWidgets import (
   QApplication,
   QHBoxLayout,
   QVBoxLayout,
@@ -92,8 +91,8 @@ class HTTPHandler(SimpleHTTPRequestHandler):
     pass
 
 class Server(QThread):
-  started = pyqtSignal()
-  error = pyqtSignal(Exception)
+  started = Signal()
+  error = Signal(Exception)
 
   def __init__(self, port):
     super(Server, self).__init__()
@@ -102,7 +101,6 @@ class Server(QThread):
   def run(self):
     try:
       with ThreadingServer(('', self.port), HTTPHandler) as self._server:
-        self.started.emit()
         self._server.serve_forever()
     except Exception as err:
       self.error.emit(err)
@@ -113,7 +111,7 @@ class Server(QThread):
     self.wait()
 
 class DDSConverter(QThread):
-  error = pyqtSignal(Exception)
+  error = Signal(Exception)
 
   def __init__(self, dds_path, dds_monitor=None):
     super(DDSConverter, self).__init__()
@@ -212,7 +210,7 @@ class DDSMonitor():
     return dds_dir
 
 class BriefingConverter(QThread):
-  error = pyqtSignal(Exception)
+  error = Signal(Exception)
 
   def __init__(self, briefing_dir):
     super(BriefingConverter, self).__init__()

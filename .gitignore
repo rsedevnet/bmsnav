@@ -1,6 +1,6 @@
 build
 dist
-dds
+release
 node_modules
 serve
 temp
