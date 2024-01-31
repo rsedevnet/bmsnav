@@ -28,7 +28,7 @@ As for Google, unfortunately they've made it significantly more difficult for in
 
 In the interim, you can download and install the APK directly, if you like: [BMSNav-1.0.0.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk)
 
-It's a universal APK that should work on any recent-ish Android device. I assume you know how to sideload APKs for your particular device, and I assume you understand the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!
+It's a universal APK that should work on any recent-ish Android device. I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!
 
 #### BMSNavServer
 
