@@ -32,9 +32,9 @@
 <p>You can get BMSNav for iOS <a href="https://apps.apple.com/us/app/bmsnav/id6476798982" rel="nofollow">here</a>, or search for "BMSNav" in the App Store on your iPhone or iPad.</p>
 <h4 id="android"><a aria-hidden="true" class="anchor" href="#android" id="android" name="android" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Android</h4>
 <p>I'm currently in the process of getting BMSNav published to the Amazon Appstore and I'll add a link here as soon as that happens.</p>
-<p>As for Google, unfortunately they've made it significantly more difficult for indie devs to publish apps on the Google Play Console since November 2023. In short, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please <a href="#contact">contact</a> me.</p>
-<p>In the interim, you can download and install the APK directly, if you like: <a href="https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk" rel="nofollow">BMSNav-1.0.0.apk</a></p>
-<p>It's a universal APK that should work on any recent-ish Android device. I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!</p>
+<p>As for Google, unfortunately it's now far more difficult for indie devs to publish apps on the Google Play Console. From November 2023, you need 20 people to test your app for a period of 14 days. If you're interested in helping with that, please <a href="#contact">contact</a> me.</p>
+<p>In the meantime, you can download and install the APK directly, if you like: <a href="https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk" rel="nofollow">BMSNav-1.0.0.apk</a></p>
+<p>It's a universal APK that should work on any recent-ish Android device, including Amazon Fire Tablets. I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!</p>
 <h4 id="bmsnavserver"><a aria-hidden="true" class="anchor" href="#bmsnavserver" id="bmsnavserver" name="bmsnavserver" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>BMSNavServer</h4>
 <p>Latest server release: <a href="https://github.com/rsedevnet/bmsnav/releases/download/v1.0.2/BMSNavServer-1.0.2.zip">BMSNavServer-1.0.2,zip</a></p>
 <p>Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start <code>BMSNavServer.exe</code> for the first time, two things are likely to happen...</p>
@@ -67,12 +67,12 @@
 </code></pre>
 <p>Note that you may need to <em>add</em> the "port" property if it doesn't exist.</p>
 <p>Restart the server for any config changes to take effect.</p>
-<p>Once the server is up and running, you'll need to configure the relevant settings in the mobile app. Click the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.</p>
+<p>Once the server is running, you'll need to configure the relevant settings in the mobile app. Click the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.</p>
 <p><a href="http://rsedevnet.github.io/bmsnav/images/settings.jpg" rel="noopener noreferrer nofollow" target="_blank"><img data-canonical-src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" style="max-width: 100%;" width="405"/></a></p>
 <p><a href="" id="development" name="development"></a></p>
 <h2 id="development"><a aria-hidden="true" class="anchor" href="#development" id="development" name="development" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development</h2>
 <p>The source code for the mobile app (iOS and Android) is kept in a private repository.</p>
-<p>The source code for the <em>server</em> is kept here in this repository. It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the <a href="https://github.com/root0fall/kneeboard-extractor">kneeboard-extractor</a> project by root0fall.</p>
+<p>The source code for the <em>server</em> is kept <a href="https://github.com/rsedevnet/bmsnav">here</a>. It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the <a href="https://github.com/root0fall/kneeboard-extractor">kneeboard-extractor</a> project by root0fall.</p>
 <h4 id="requirements"><a aria-hidden="true" class="anchor" href="#requirements" id="requirements" name="requirements" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>Requirements</h4>
 <ul>
 <li>Windows 11 (should work on 10, but untested)</li>
