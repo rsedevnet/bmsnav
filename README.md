@@ -24,11 +24,11 @@ You can get BMSNav for iOS [here](https://apps.apple.com/us/app/bmsnav/id6476798
 
 I'm currently in the process of getting BMSNav published to the Amazon Appstore and I'll add a link here as soon as that happens.
 
-As for Google, unfortunately they've made it significantly more difficult for indie devs to publish apps on the Google Play Console since November 2023. In short, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please [contact](#contact) me.
+As for Google, unfortunately it's now far more difficult for indie devs to publish apps on the Google Play Console. From November 2023, you need 20 people to test your app for a period of 14 days. If you're interested in helping with that, please [contact](#contact) me.
 
-In the interim, you can download and install the APK directly, if you like: [BMSNav-1.0.0.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk)
+In the meantime, you can download and install the APK directly, if you like: [BMSNav-1.0.0.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk)
 
-It's a universal APK that should work on any recent-ish Android device. I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!
+It's a universal APK that should work on any recent-ish Android device, including Amazon Fire Tablets. I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!
 
 #### BMSNavServer
 
@@ -84,7 +84,7 @@ Note that you may need to _add_ the "port" property if it doesn't exist.
 
 Restart the server for any config changes to take effect.
 
-Once the server is up and running, you'll need to configure the relevant settings in the mobile app. Click the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.
+Once the server is running, you'll need to configure the relevant settings in the mobile app. Click the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.
 
 <img src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" width="405"/>
 
@@ -93,7 +93,7 @@ Once the server is up and running, you'll need to configure the relevant setting
 
 The source code for the mobile app (iOS and Android) is kept in a private repository.
 
-The source code for the _server_ is kept here in this repository. It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the [kneeboard-extractor](https://github.com/root0fall/kneeboard-extractor) project by root0fall.
+The source code for the _server_ is kept [here](https://github.com/rsedevnet/bmsnav). It's a Python app and packaged as a Windows executable. Several of the ideas are borrowed from the [kneeboard-extractor](https://github.com/root0fall/kneeboard-extractor) project by root0fall.
 
 #### Requirements
 
