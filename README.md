@@ -22,13 +22,13 @@ You can get BMSNav for iOS [here](https://apps.apple.com/us/app/bmsnav/id6476798
 
 #### Android
 
-I'm currently in the process of getting BMSNav published to the Amazon Appstore and I'll add a link here as soon as that happens.
+Available on the Amazon Appstore for all recent-ish Android devices, including Amazon Fire Tablets. You can download the Appstore for Android [here](https://www.amazon.com/gp/mas/get/amazonapp). Once installed, search for "BMSNav" and you'll find it.
 
-As for Google, unfortunately it's now far more difficult for indie devs to publish apps on the Google Play Console. From November 2023, you need 20 people to test your app for a period of 14 days. If you're interested in helping with that, please [contact](#contact) me.
+As for Google, unfortunately it's now far more difficult for indie devs to publish apps on the Google Play Console. From November 2023, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please [contact](#contact) me.
 
-In the meantime, you can download and install the APK directly, if you like: [BMSNav-1.0.0.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk)
+Finally, you can also install it directly: [BMSNav-1.0.0.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.0.apk)
 
-It's a universal APK that should work on any recent-ish Android device, including Amazon Fire Tablets. I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend waiting for the Amazon Appstore release... hopfeully soon!
+In so doing, I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend getting it from Amazon's Appstore.
 
 #### BMSNavServer
 
