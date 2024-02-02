@@ -63,6 +63,14 @@ DEFAULT_THEATERS = [
   {
     "name": "EMF",
     "addOnDir": "Add-On EMF"
+  },
+  {
+    "name": "Nevada",
+    "addOnDir": "Add-On Nevada"
+  },
+  {
+    "name": "Nordic",
+    "addOnDir": "Add-On Nordic"
   }
 ]
 DEFAULT_SELECTED_THEATER = DEFAULT_THEATERS[0]
