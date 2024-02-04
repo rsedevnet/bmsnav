@@ -32,7 +32,7 @@ In so doing, I assume that you know how to sideload APKs for your particular dev
 
 #### BMSNavServer
 
-Latest server release: [BMSNavServer-1.0.3,zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.3/BMSNavServer-1.0.3.zip)
+Latest server release: [BMSNavServer-1.0.3.zip](https://github.com/rsedevnet/bmsnav/releases/download/v1.0.3/BMSNavServer-1.0.3.zip)
 
 Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start ```BMSNavServer.exe``` for the first time, two things are likely to happen...
 * Windows will ask if you want to allow the app to accept network connections. Say yes.
