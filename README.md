@@ -26,7 +26,7 @@ Available on the Amazon Appstore for all recent-ish Android devices, including A
 
 As for Google, unfortunately it's now far more difficult for indie devs to publish apps on the Google Play Console. From November 2023, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please [contact](#contact) me.
 
-Finally, you can also install it directly: [BMSNav-1.0.1.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.1.apk)
+Finally, you can also install it directly: [BMSNav-1.0.3.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.3.apk)
 
 In so doing, I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend getting it from Amazon's Appstore.
 
