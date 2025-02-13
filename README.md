@@ -26,7 +26,7 @@ Available on the Amazon Appstore for all recent-ish Android devices, including A
 
 As for Google, unfortunately it's now far more difficult for indie devs to publish apps on the Google Play Console. From November 2023, you need 20 people to test your app for a period of 14 days. If you're interested in helping with this, please [contact](#contact) me.
 
-Finally, you can also install it directly: [BMSNav-1.0.3.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.3.apk)
+Finally, you can also install it directly: [BMSNav-1.0.4.apk](https://rsedev.net/bmsnav/apk/BMSNav-1.0.4.apk)
 
 In so doing, I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend getting it from Amazon's Appstore.
 
@@ -160,11 +160,11 @@ Venmo: [@seidemiller](https://venmo.com/?txn=pay&audience=private&recipients=@se
 <a id="license"></a>
 ## MIT License
 
-Copyright (c) 2024 Sean Eidemiller
+Copyright (c) 2024-25 Sean Eidemiller
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be  included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
