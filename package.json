@@ -1,6 +1,6 @@
 {
   "name": "BMSNavServer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Sean Eidemiller (seidemiller@gmail.com)",
   "devDependencies": {
     "@octokit/core": "^5.1.0",
@@ -10,12 +10,12 @@
   },
   "scripts": {
     "check-for-rimraf": "node tools/check-for-rimraf.js",
-    "start": "python bmsnavserver.py",
+    "start": "py bmsnavserver.py",
     "start:mac": "python3 bmsnavserver.py",
     "package-zip": "node tools/package-zip.js",
     "package": "nuitka --standalone --plugin-enable=pyside6 --disable-console --output-filename=BMSNavServer.exe --output-dir=release --windows-icon-from-ico=resources/icon.ico bmsnavserver.py && npm run package-zip",
     "clean": "npm run check-for-rimraf && rimraf release && rimraf serve && rimraf config.json && rimraf .bmsnavserver.spec",
-    "html": "python tools/readme-to-html.py",
+    "html": "py tools/readme-to-html.py",
     "html:mac": "python3 tools/readme-to-html.py"
   }
 }

@@ -65,12 +65,20 @@ DEFAULT_THEATERS = [
     "addOnDir": "Add-On EMF"
   },
   {
+    "name": "Georgia",
+    "addOnDir": "Add-On Georgia"
+  },
+  {
     "name": "Nevada",
     "addOnDir": "Add-On Nevada"
   },
   {
     "name": "Nordic",
     "addOnDir": "Add-On Nordic"
+  },
+  {
+    "name": "Gibraltar",
+    "addOnDir": "Add-On Gibraltar"
   }
 ]
 DEFAULT_SELECTED_THEATER = DEFAULT_THEATERS[0]
@@ -181,12 +189,15 @@ class DDSMonitor():
   def _get_kneeboard_file(self, selected_theater):
     kneeboard_file = None
     dds_dir = None
+    default_dds_dir = os.path.join(self.bms_home_dir, 'Data', 'TerrData', 'Objects', 'KoreaObj')
     addon_dir = selected_theater['addOnDir']
 
     if addon_dir:
       dds_dir = os.path.join(self.bms_home_dir, 'Data', addon_dir, 'Terrdata', 'Objects', 'KoreaObj')
+      if not os.path.exists(dds_dir):
+        dds_dir = default_dds_dir
     else:
-      dds_dir = os.path.join(self.bms_home_dir, 'Data', 'TerrData', 'Objects', 'KoreaObj')
+      dds_dir = default_dds_dir
 
     kneeboard_file = os.path.join(dds_dir, f'{self.dds_index}.dds')
 
@@ -428,6 +439,8 @@ class Window(QMainWindow):
         self.briefing_converter.start()
 
       if (not init_failed):
+        self._check_for_dds_dir_and_warn(self.selected_theater)
+
         try:
           for i in range(7982, 7998):
             monitor = DDSMonitor(bms_home, i, self._on_dds_change)
@@ -510,6 +523,14 @@ class Window(QMainWindow):
 
     return None
 
+  def _check_for_dds_dir_and_warn(self, theater):
+    theater_dir = theater['addOnDir']
+
+    if theater_dir:
+      theater_dds_dir = os.path.join(self._get_bms_home_dir(), 'Data', theater_dir, 'Terrdata', 'Objects', 'KoreaObj')
+      if not os.path.exists(theater_dds_dir):
+        self.console_append('Selected theater not installed or does not provide kneeboards; using default Korea.', LogLevel.WARN)
+
   def _on_theater_change(self, theater_name):
     theater = self._get_theater_from_name(theater_name) 
 
@@ -519,6 +540,8 @@ class Window(QMainWindow):
       self.console_append('Theater changed; generating kneeboard images...')
 
       self.selected_theater = theater
+
+      self._check_for_dds_dir_and_warn(theater)
 
       if self.dds_monitors:
         for m in self.dds_monitors:
