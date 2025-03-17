@@ -79,6 +79,10 @@ DEFAULT_THEATERS = [
   {
     "name": "Gibraltar",
     "addOnDir": "Add-On Gibraltar"
+  },
+  {
+    "name": "Mideast128",
+    "addOnDir": "Add-On Mideast128"
   }
 ]
 DEFAULT_SELECTED_THEATER = DEFAULT_THEATERS[0]
