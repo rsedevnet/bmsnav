@@ -1,6 +1,6 @@
 {
   "name": "BMSNavServer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Sean Eidemiller (seidemiller@gmail.com)",
   "devDependencies": {
     "@octokit/core": "^5.1.0",

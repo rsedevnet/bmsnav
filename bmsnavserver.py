@@ -44,7 +44,7 @@ class LogLevel(StrEnum):
 
 SERVER_ROOT = 'serve'
 
-DEFAULT_BMS_VERSION = '4.37'
+DEFAULT_BMS_VERSION = '4.38'
 DEFAULT_REGISTRY_KEY = get_registry_key(DEFAULT_BMS_VERSION)
 DEFAULT_SERVER_PORT = 2676
 DEFAULT_THEATERS = [
@@ -59,6 +59,10 @@ DEFAULT_THEATERS = [
   {
     "name": "Israel",
     "addOnDir": "Add-On Israel"
+  },
+  {
+    "name": "Hellenic",
+    "addOnDir": "Add-On Hellas"
   },
   {
     "name": "EMF",
@@ -391,11 +395,13 @@ class Window(QMainWindow):
       try:
         bms_version = config['bmsVersion']
 
-        if version:
+        if bms_version:
           self.bms_version = bms_version
           self.registry_key = get_registry_key(bms_version)
       except Exception as bms_version_err:
         pass
+
+      self.console_append('BMS version: ' + self.bms_version)
 
       try:
         port = config['port']

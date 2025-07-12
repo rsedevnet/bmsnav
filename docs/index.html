@@ -36,7 +36,7 @@
 <p>Finally, you can also install it directly: <a href="https://rsedev.net/bmsnav/apk/BMSNav-1.0.4.apk" rel="nofollow">BMSNav-1.0.4.apk</a></p>
 <p>In so doing, I assume that you know how to sideload APKs for your particular device and that you're aware of the risks involved. If you're not sure what any of this means, I would recommend getting it from Amazon's Appstore.</p>
 <h4 id="bmsnavserver"><a aria-hidden="true" class="anchor" href="#bmsnavserver" id="bmsnavserver" name="bmsnavserver" tabindex="-1"><span aria-hidden="true" class="octicon octicon-link"></span></a>BMSNavServer</h4>
-<p>Latest server release: <a href="https://github.com/rsedevnet/bmsnav/releases/download/v1.0.5/BMSNavServer-1.0.5.zip">BMSNavServer-1.0.5.zip</a></p>
+<p>Latest server release: <a href="https://github.com/rsedevnet/bmsnav/releases/download/v1.0.6/BMSNavServer-1.0.6.zip">BMSNavServer-1.0.6.zip</a></p>
 <p>Simply unzip the file and place the directory anywhere you like (on the same machine as your Falcon BMS installation). When run, it should be able to locate BMS regardless of where it was installed. Note that when you start <code>BMSNavServer.exe</code> for the first time, two things are likely to happen...</p>
 <ul>
 <li>Windows will ask if you want to allow the app to accept network connections. Say yes.</li>
@@ -66,6 +66,12 @@
 }
 </code></pre>
 <p>Note that you may need to <em>add</em> the "port" property if it doesn't exist.</p>
+<p>Also note that, as of v1.0.6, BMSNavServer defaults to BMS 4.38. If you need to run BMSNav with 4.37, simply specify the version in the same config file as above...</p>
+<pre><code>{
+  "selectedTheater": "Korea",
+  "bmsVersion": "4.37"
+}
+</code></pre>
 <p>Restart the server for any config changes to take effect.</p>
 <p>Once the server is running, you'll need to configure the relevant settings in the mobile app. Click the gear icon on the top right of the screen and enter the IP and port of the server. The IP will obviously be the address of the machine on which the server is running. Of course you'll need to make sure that your mobile device is able to route to the server.</p>
 <p><a href="http://rsedevnet.github.io/bmsnav/images/settings.jpg" rel="noopener noreferrer nofollow" target="_blank"><img data-canonical-src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" height="540" src="http://rsedevnet.github.io/bmsnav/images/settings.jpg" style="max-width: 100%;" width="405"/></a></p>
